@@ -1,0 +1,48 @@
+<form id="forma2" method="post" novalidate style="width:400px" ng-show="sesija['tipkorisnikabr']< 2">
+    <div class="unos_podataka">
+        <label id="labpodrucje" for="podrucje">datvri podrucja</label>
+        <input ng-model="podrucje1" style="float: right" id="podrucje" name="podrucje" type="text"
+               placeholder="">
+    </div>
+    <br>
+    <div class="unos_podataka">
+        <label id="labdrzava" for="drzava">Drzava</label>
+        <input ng-model="drzava1" style="float: right" id="drzava" name="drzava" type="text" placeholder="">
+    </div>
+
+    <br>
+    <button class="gumb" ng-click="kreirajpodrucje()">Kreiraj</button>
+    <button class="gumb" ng-click="updatePodrucje()">Ažuriraj</button>
+    <br>
+    <button class="gumb" ng-click="Dodjelimod()">Dodijeli Moderatora</button>
+    <button class="gumb" ng-click="Brisipodr()">Brisi</button>
+    <br>
+    <br>
+    <button class="gumb" ng-click="BrisiDrzavu()">Brisi Drzavu i sva podrucja unutar</button>
+
+</form>
+
+<div class="razmak"></div>
+<div style="width: 500px">
+    <div class="unos_podataka">
+        <label id="labdatumrez" for="datumrez">Datum i vrijeme Rezervacije</label>
+        <input style="float:right" ng-model="datumrez" id="datumrez" name="datumrez" type="datetime-local"
+               placeholder="">
+    </div>
+    <div class="unos_podataka">
+        <label id="labadresado" for="adresado">Adresa odredišta</label>
+        <input style="float:right" ng-model="adresado" id="adresado" name="adresado" type="text" placeholder="">
+    </div>
+    <button class="gumb" ng-click="rezerviraj()">Pošalji rezervaciju</button>
+</div>
+
+
+<br>
+<br>
+<div ng-show="sesija['tipkorisnikabr']< 2">
+    <label for="smod">Moderator</label>
+    <select style="float: right" id="smod" data-ng-model="selektiranimoderator">
+        <option value="">Odaberite moderatora</option>
+        <option ng-repeat="mod in moderatori" value="{{mod}}">{{mod}}</option>
+    </select>
+</div>

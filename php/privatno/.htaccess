@@ -1,0 +1,5 @@
+AuthName 'WebDiP - admin1 - Administracija sustava'
+AuthType Basic
+AuthUserFile /var/www/webdip.barka.foi.hr/2016_projekti/WebDiP2016x075/php/privatno/korisnici.txt
+Require valid-user
+

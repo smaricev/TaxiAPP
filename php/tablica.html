@@ -1,0 +1,88 @@
+<div class="outer"><p ng-show="!podaci">ADMIN ONLY! ZA PRIKAZ OVOGA SE MORATE ULOGIRATI!</p>
+    <div style="display: inline-block">
+        <input class="gumbmoj" ng-model="rici" placeholder="Pretrazi korisnike" ng-change="currentPage=0">
+        <input style="width : 50px" class="gumbmoj" ng-model="pageSize" placeholder="Velicina stranice">
+    </div>
+    <div style="clear:both;height: 10px"></div>
+    <table ng-show="podaci" class="tablica1" id="testtablica">
+        <thead class="tablica1_zaglavlje">
+        <tr>
+            <th ng-click="orderByField='admin'; reverseSort = !reverseSort">korime
+                <span
+                        ng-show="orderByField == 'admin'"><span ng-show="!reverseSort">^</span><span
+                        ng-show="reverseSort">*</span>
+                </span>
+            </th>
+            <th ng-click="orderByField='email'; reverseSort = !reverseSort">email<span
+                    ng-show="orderByField == 'email'"><span ng-show="!reverseSort">^</span><span
+                    ng-show="reverseSort">*</span></span></th>
+            <th ng-click="orderByField='ime'; reverseSort = !reverseSort">ime<span ng-show="orderByField == 'ime'"><span
+                    ng-show="!reverseSort">^</span><span ng-show="reverseSort">*</span></span></th>
+            <th ng-click="orderByField='prezime'; reverseSort = !reverseSort">prezime<span
+                    ng-show="orderByField == 'prezime'"><span ng-show="!reverseSort">^</span><span
+                    ng-show="reverseSort">*</span></span></th>
+            <th id="wowheader" ng-click="orderByField='lozinka'; reverseSort = !reverseSort">lozinka<span
+                    ng-show="orderByField == 'lozinka'"><span ng-show="!reverseSort">^</span><span
+                    ng-show="reverseSort">*</span></span></th>
+            <th ng-click="orderByField='kriptirana_lozinka'; reverseSort = !reverseSort">kriptirana_lozinka<span
+                    ng-show="orderByField == 'kriptirana_lozinka'"><span ng-show="!reverseSort">^</span><span
+                    ng-show="reverseSort">*</span></span></th>
+            <th ng-click="orderByField='tip_korisnika_id'; reverseSort = !reverseSort">tip_korisnika_id<span
+                    ng-show="orderByField == 'tip_korisnika_id'"><span ng-show="!reverseSort">^</span><span
+                    ng-show="reverseSort">*</span></span></th>
+            <th ng-click="orderByField='zakljucan'; reverseSort = !reverseSort">zakljucan<span
+                    ng-show="orderByField == 'zakljucan'"><span ng-show="!reverseSort">^</span><span
+                    ng-show="reverseSort">*</span></span></th>
+            <th ng-click="orderByField='aktiviran'; reverseSort = !reverseSort">aktiviran<span
+                    ng-show="orderByField == 'aktiviran'"><span ng-show="!reverseSort">^</span><span
+                    ng-show="reverseSort">*</span></span></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-style="row.stil"
+            ng-repeat="row in podaci | filter:rici| startFrom:currentPage*pageSize | limitTo:pageSize  | orderBy:orderByField:reverseSort"
+            class=tablica1_redak1">
+            <td>{{row['korime']}}<input ng-init="row.nazivpromjena=[]" ng-show="row.editing" ng-model="row['korime']"
+                                        ng-keypress="doneEditing(row,$event)"
+                                        ng-blur="doneEditingBlur(row,row['korime'])" autofocus/></td>
+            <td>{{row['email']}}<input ng-init="row.nazivpromjena=[]" ng-show="row.editing" ng-model="row['email']"
+                                       ng-keypress="doneEditing(row,$event)" ng-blur="doneEditingBlur(row,row['email'])"
+                                       autofocus/></td>
+            <td>{{row['ime']}}<input ng-init="row.nazivpromjena=[]" ng-show="row.editing" ng-model="row['ime']"
+                                     ng-keypress="doneEditing(row,$event)" ng-blur="doneEditingBlur(row,row['ime'])"
+                                     autofocus/></td>
+            <td>{{row['prezime']}}<input ng-init="row.nazivpromjena=[]" ng-show="row.editing" ng-model="row['prezime']"
+                                         ng-keypress="doneEditing(row,$event)"
+                                         ng-blur="doneEditingBlur(row,row['prezime'])" autofocus/></td>
+            <td>{{row['lozinka']}}<input ng-init="row.nazivpromjena=[]" ng-show="row.editing" ng-model="row['lozinka']"
+                                         ng-keypress="doneEditing(row,$event)"
+                                         ng-blur="doneEditingBlur(row,row['lozinka'])" autofocus/></td>
+            <td>{{row['kriptirana_lozinka']}}<input ng-init="row.nazivpromjena=[]" ng-show="row.editing"
+                                                    ng-model="row['kriptirana_lozinka']" ng-keypress="doneEditing(row,$event)"
+                                                    ng-blur="doneEditingBlur(row,row['kriptirana_lozinka'])" autofocus/></td>
+            <td>{{row['tip_korisnika_id']}}<input ng-init="row.nazivpromjena=[]" ng-show="row.editing"
+                                                  ng-model="row['tip_korisnika_id']" ng-keypress="doneEditing(row,$event)"
+                                                  ng-blur="doneEditingBlur(row,row['tip_korisnika_id'])" autofocus/></td>
+            <td>{{row['aktiviran']}}<input ng-init="row.nazivpromjena=[]" ng-show="row.editing"
+                                           ng-model="row['aktiviran']" ng-keypress="doneEditing(row,$event)"
+                                           ng-blur="doneEditingBlur(row,row['aktiviran'])" autofocus/></td>
+            <td>{{row['zakljucan']}}<input ng-init="row.nazivpromjena=[]" ng-show="row.editing"
+                                           ng-model="row['zakljucan']" ng-keypress="doneEditing(row,$event)"
+                                           ng-blur="doneEditingBlur(row,row['zakljucan'])" autofocus/>
+            </td>
+            <td></td>
+
+        </tr>
+    </table>
+</div>
+<button class="gumb" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+    Previous
+</button>
+<span ng-show="(data| filter:rici).length>0">{{currentPage+1}}/{{numberOfPages()}}</span>
+<button style="float:none" class="gumb" ng-disabled="currentPage >= data.length/pageSize - 1"
+        ng-click="currentPage=currentPage+1">
+    Next
+</button>
+
+</div>
